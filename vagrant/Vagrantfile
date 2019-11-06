@@ -244,41 +244,62 @@ config.vm.provision "ipv4-isis-sr-connc",
                       run: "never",
                       inline: <<-SHELL
 
-    echo "\033[0;34mShowning CORE mpls\033[0m"    
+    echo "\033[0;34mShowning CORE\033[0m"    
     (
     sleep 2
-    echo "sh mpls for"
+    echo "terminal length 512"
     sleep 2
+    echo "sh mpls for"
+    sleep 4
+    echo "show ipv4 vrf"
+    sleep 4
+    echo "show ipv4 bgp 1 summary"
+    sleep 4
     echo "exit"
     ) | ip netns exec core1 inetutils-telnet 127.0.01 2323; true
 
 
-    echo "\033[0;34mShowning CPE1 mpls\033[0m"    
+    echo "\033[0;34mShowning CPE1\033[0m"    
     (
+    sleep 2
+    echo "terminal length 512"
     sleep 2
     echo "sh mpls for"
-    sleep 2
+    sleep 4
+    echo "show ipv4 vrf"
+    sleep 4
+    echo "show ipv4 bgp 1 summary"
+    sleep 4
     echo "exit"
     ) | ip netns exec cpe1 inetutils-telnet 127.0.01 2323; true
-
-    echo "\033[0;34mConnectivity check\033[0m"
-
-    echo "\033[0;34mShowning CPE1 mpls\033[0m"    
-    (
-    sleep 2
-    echo "ping 10.2.2.2 /vrf v1 /interface lo0"
-    sleep 2
-    echo "exit"
-    ) | ip netns exec cpe1 inetutils-telnet 127.0.01 2323; true
-    
 
     echo "\033[0;34mShowning CPE2 mpls\033[0m"    
     (
     sleep 2
-    echo "sh mpls for"
+    echo "terminal length 512"
     sleep 2
+    echo "sh mpls for"
+    sleep 4
+    echo "show ipv4 vrf"
+    sleep 4
+    echo "show ipv4 bgp 1 summary"
+    sleep 4
     echo "exit"
     ) | ip netns exec cpe2 inetutils-telnet 127.0.01 2323; true
+
+
+    echo "\033[0;34mConnectivity check\033[0m"
+
+    echo "\033[0;34mShowning CPE1\033[0m"    
+    (
+    sleep 2
+    echo "terminal length 512"
+    sleep 4
+    echo "ping 10.2.2.2 /vrf v1 /interface lo0"
+    sleep 4
+    echo "exit"
+    ) | ip netns exec cpe1 inetutils-telnet 127.0.01 2323; true
+    
 
     SHELL
 
