@@ -130,10 +130,10 @@ control ctl_ingress(inout headers hdr,
                   inout standard_metadata_t standard_metadata) {
 
    /*
-    * Discard via V1Model mark_to_drop()
+    * Discard via V1Model mark_to_drop(standard_metadata)
     */
    action act_ipv4_fib_discard() {
-      mark_to_drop();
+      mark_to_drop(standard_metadata);
    }
 
 
